@@ -6,6 +6,9 @@ Every option takes time to execute in a computer. This time also differs based o
 
 Timing attack can be a more efficient and easier method to find out secrets/keys when compared to cryptanalysis of known plaintext, ciphertext pairs.
 
+Even though Timing Attacks work well in research conditions, they are very rare in the wild. In addition, one must execute these attacks multiple times to gather samples that reveal the timing difference and give clues regarding the plaintext and the key. Hence, they tend to be very slow and not discreet.
+They also are **all-encompassing**, i.e., timing measures leak **everything** a system is doing, not just cryptographic algorithms.
+
 ## Example
 
 ```python
@@ -36,3 +39,14 @@ def compare(s1, s2):
             flag = False
     return flag
 ```
+
+## Constant-Time Cryptography
+
+They are pieces of code that do not leak information via timing analysis, i.e., they are **not** vulnerable to timing attacks. There are two main approaches to Constant-Time Cryptography:
+
+- Execution time does not depend on the `secret` elements that are to be protected. Either the execution time is constant, or it is not correlated to the secret elements, i.e., execution time can vary but it is not dependent on the secret elements.
+- The other method is **masking** where you introduce a random integer `r modulo n` and add this to encrypting a plaintext. This results in the attacker not knowing what the encryption was performed on, thus depriving him the chance of correlating execution time with a plaintext or a key.
+
+#### Example
+
+In RSA, encryption is m <sup>d</sup> mod n. This can be converted to r<sup>-1</sup>(mr<sup>e</sup>)<sup>d</sup> mod n.
