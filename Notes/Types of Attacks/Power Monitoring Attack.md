@@ -29,5 +29,13 @@ The **lower curve** represents the **second and third rounds** of the encryption
 
 It is not practical when there is a lot of noise in the power consumption. In addition, it is very easy to prevent a SPA-resistant device as well.
 
-## Dynamic Power Analysis (DPA)
+## Differential Power Analysis (DPA)
 
+It is a statistical method to apply data-dependent correlations and is much more powerful than SPA, and as a result, much more difficult to prevent.
+
+There are two major phases to DPA:
+
+- **Data Collection**: Sampling a device's power consumption while executing cryptographic operations as a function of time.
+- **Data Analysis**: Analysing the collected data to find correlations between cryptographic operations and power consumption.
+
+This approach takes multiple traces of two sets of data. Now one must compute the difference between the average of these traces. If this value is zero, there is no correlation. If the difference is non-zero, these sets of data are correlated. Even tiny correlations can be seen given enough traces as noise in a system is eliminated during the averaging.
