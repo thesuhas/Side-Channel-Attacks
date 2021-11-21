@@ -26,3 +26,8 @@ SPA can be used to break RSA by looking at the difference in power consumption d
 The above figure represents power consumption during DES.
 The **upper curve** represents the **entire encryption process**, including initial permutation, 16 rounds and the final permutation.
 The **lower curve** represents the **second and third rounds** of the encryption process.
+
+It is not practical when there is a lot of noise in the power consumption. In addition, it is very easy to prevent a SPA-resistant device as well.
+
+## Dynamic Power Analysis (DPA)
+
