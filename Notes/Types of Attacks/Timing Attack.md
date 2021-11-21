@@ -50,3 +50,9 @@ They are pieces of code that do not leak information via timing analysis, i.e., 
 #### Example
 
 In RSA, encryption is m <sup>d</sup> mod n. This can be converted to r<sup>-1</sup>(mr<sup>e</sup>)<sup>d</sup> mod n.
+
+The ideal method to ensure Constant-Time cryptography is to write code in assembly as modern languages and compilers aren't built for constant-time cryptography. Instructions that are Constant-Time can also vary from chipset to chipset and architecture to architecture.
+
+The most practical method is to write code that **looks like** Constant-Time. This is not guaranteed to work as if the compiler detects a better way to execute the code, it will, thus not ensure constant-time cryptography.
+
+There is research going on to make compilers to be more resistant to Timing attacks and till then, the mentioned practices must be taken to ensure security.
