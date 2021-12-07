@@ -39,3 +39,32 @@ There are two major phases to DPA:
 - **Data Analysis**: Analysing the collected data to find correlations between cryptographic operations and power consumption.
 
 This approach takes multiple traces of two sets of data. Now one must compute the difference between the average of these traces. If this value is zero, there is no correlation. If the difference is non-zero, these sets of data are correlated. Even tiny correlations can be seen given enough traces as noise in a system is eliminated during the averaging.
+
+![DPA](../Images/DPA.png)
+
+The average of two sets of traces in DPA are shown on the first two lines of the above picture. The difference of those two traces is shown in the third line. The trace on the fourth line is the same but magnified by a factor of 15. There is a clear non-zero value being shown in the fourth line and hence it can be inferred that these two straces are correlated. If there was no correlation, the difference would be zero or close to zero.
+
+#### Application of DPA to break AES
+
+![Equation for AES](../Images/aes.png)
+
+The above picture contains the equation of AES where `S` is a look-up table, which is used on the XOR of a known input X<sub>n</sub> and an encryption key K<sub>n</sub>. To determine K<sub>n</sub>, several guesses are made. <br>
+The first set of traces fall into the set where LSB of Output is 0. The second set of traces fall into the set where LSB of Output is 1. As stated earlier, the difference of the average of the two traces is computed and examined. In the below figure, there are traces of five different K<sub>n</sub> values.
+
+![DPA AES](../Images/DPA-AES.png)
+
+The correct key is in the **third** trace. As the encryption key is usually a 128-bit value, the number of attempts to test every single value would be 2<sup>128</sup>. This key can be broken into `16-bit` blocks where each byte can be solved individually. It will take only 16 * 256 attempts or 4096 attempts to break the entire key.
+
+## Countermeasures
+
+#### SPA
+
+SPA can be prevented by just adding noise to the system. In addition, one can also perform random operations to obscure the power consumption done by other operations. The design should **not** have conditional branches.
+
+#### DPA
+
+Preventing DPA is much more challenging. A few common methods are:
+
+- Decrease the **signal-to-noise** ratio. Lower the ratio, greater the number of traces required to perform the attack. Adding random wait states and dummy operations also helps.
+- Balancing the amount of power used for given data value or operation. Balancing power consumption will result in reducing the amplitude of trace, making detecting correlations that much harder.
+- The **most effective** and **least difficult** way to prevent side-channel attacks is to limit the number of transactions that can be performed with a particular key, like a password timeout.
