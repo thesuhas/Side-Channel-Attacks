@@ -12,8 +12,6 @@ These attacks are of a huge concern as they lead to a huge breach in security an
 ### Types
 
 Some types of Side Channel Attacks are:
-
-- **Cache Attack**: Based on the attacker's ability to monitor cache accesses in a shared physical system such as a cloud service.
 - **Timing Attack**: Attacker aims to gain information by analysing the time taken to execute cryptographic algorithms or relevant operations.
 - **Power-Monitoring Attack**: Based on the various levels of power draw by the hardware while performing cryptographic operations or executing cryptographic algorithms.
 - **Acoustic Cryptanalysis**: Exploits the amount and variation of sound emitted by a computer during computation. Mainly focuses on the sounds produced by keyboards and internal components.
